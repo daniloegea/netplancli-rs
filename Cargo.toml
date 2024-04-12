@@ -10,5 +10,4 @@ members = ["commands"]
 
 [dependencies]
 clap = "4.5"
-libnetplan = { git = "https://github.com/daniloegea/libnetplan-rs" }
 commands = { path = "./commands" }

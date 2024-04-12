@@ -1,6 +1,7 @@
 use clap::{Arg, Command};
 
 use commands::get::get;
+use commands::set::set;
 
 fn main() {
     let command = Command::new("netplancli")
@@ -10,6 +11,13 @@ fn main() {
                 .about("Get all the things \\o/")
                 .arg(Arg::new("root dir").long("root-dir").default_value("/"))
                 .arg(Arg::new("key").default_value("all")),
+        )
+        .subcommand(
+            Command::new("set")
+                .about("Set all the things \\o/")
+                .arg(Arg::new("root dir").long("root-dir").default_value("/"))
+                .arg(Arg::new("source").long("source"))
+                .arg(Arg::new("key_value").required(true)),
         );
 
     match command.get_matches().subcommand() {
@@ -18,6 +26,12 @@ fn main() {
             let root_dir = args.get_one::<String>("root dir").unwrap();
             get(key, root_dir);
         }
+        Some(("set", args)) => {
+            let key = args.get_one::<String>("key_value").unwrap();
+            let root_dir = args.get_one::<String>("root dir").unwrap();
+            set(key, root_dir);
+        }
+
         _ => {}
     }
 }
