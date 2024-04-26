@@ -8,8 +8,13 @@ pub fn get(key: &str, root_dir: &str) {
         return;
     }
 
-    let state = State::new();
-    _ = state.import_parser_state(parser);
+    let state = match State::try_from(parser) {
+        Ok(s) => s,
+        Err(_) => {
+            println!("Can't import parser state");
+            return;
+        }
+    };
 
     if key == "all" {
         let yaml = state.dump_yaml().unwrap();
