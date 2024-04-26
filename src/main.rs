@@ -16,7 +16,11 @@ fn main() {
             Command::new("set")
                 .about("Set all the things \\o/")
                 .arg(Arg::new("root-dir").long("root-dir").default_value("/"))
-                .arg(Arg::new("origin-hint").long("origin-hint"))
+                .arg(
+                    Arg::new("origin-hint")
+                        .long("origin-hint")
+                        .default_value("70-netplan-set"),
+                )
                 .arg(Arg::new("key_value").required(true)),
         );
 

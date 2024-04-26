@@ -2,7 +2,7 @@ use libnetplan::parser::Parser;
 use libnetplan::state::State;
 
 pub fn get(key: &str, root_dir: &str) {
-    let parser = Parser::new();
+    let mut parser = Parser::new();
     if let Err(error) = parser.load_yaml_hierarchy(root_dir) {
         println!("error: {error:?}");
         return;
