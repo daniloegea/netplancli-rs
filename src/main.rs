@@ -15,8 +15,8 @@ fn main() {
         .subcommand(
             Command::new("set")
                 .about("Set all the things \\o/")
-                .arg(Arg::new("root dir").long("root-dir").default_value("/"))
-                .arg(Arg::new("source").long("source"))
+                .arg(Arg::new("root-dir").long("root-dir").default_value("/"))
+                .arg(Arg::new("origin-hint").long("origin-hint"))
                 .arg(Arg::new("key_value").required(true)),
         );
 
@@ -28,8 +28,9 @@ fn main() {
         }
         Some(("set", args)) => {
             let key = args.get_one::<String>("key_value").unwrap();
-            let root_dir = args.get_one::<String>("root dir").unwrap();
-            set(key, root_dir);
+            let root_dir = args.get_one::<String>("root-dir");
+            let origin_hint = args.get_one::<String>("origin-hint");
+            set(key, origin_hint, root_dir);
         }
 
         _ => {}
